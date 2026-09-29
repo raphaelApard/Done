@@ -101,4 +101,4 @@ The script only writes PNG files. The Android vector layers, the `Contents.json`
 
 ## Contributing
 
-Work happens on short-lived branches cut from `develop` (`feat/…`, `fix/…`, `docs/…`) and merged through pull requests. `main` only receives tagged merges from `develop`. Commits follow [Conventional Commits](https://www.conventionalcommits.org/).
+Work happens on short-lived branches cut from `develop` (`feat/…`, `fix/…`, `docs/…`) and merged through pull requests. `main` only receives tagged merges from `develop`. The `check` job of the CI (`flutter analyze` and `flutter test`) must pass before a pull request can be merged into `develop` or `main`: branch protection enforces it, administrators included. A release is a pull request from `develop` to `main`, tagged once merged. Commits follow [Conventional Commits](https://www.conventionalcommits.org/).
