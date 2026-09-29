@@ -1,12 +1,21 @@
 **Français** · [English](README.md)
 
-# Done
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/logo/logo-dark.svg">
+    <img src="assets/logo/logo.svg" width="96" alt="Logo Done">
+  </picture>
+</p>
 
-[![CI](https://github.com/raphaelApard/Done/actions/workflows/ci.yml/badge.svg)](https://github.com/raphaelApard/Done/actions/workflows/ci.yml)
+<h1 align="center">Done</h1>
 
-Une app de tâches calme et pastel, organisée par projets. Écrite en Flutter, elle fonctionne hors ligne et suit le thème clair ou sombre du système.
+<p align="center">
+  <a href="https://github.com/raphaelApard/Done/actions/workflows/ci.yml"><img src="https://github.com/raphaelApard/Done/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+</p>
 
-<p>
+<p align="center">Une app de tâches calme et pastel, organisée par projets. Écrite en Flutter, elle fonctionne hors ligne et suit le thème clair ou sombre du système.</p>
+
+<p align="center">
   <img src="docs/screenshots/light-home.png" width="200" alt="Accueil, thème clair">
   <img src="docs/screenshots/light-project.png" width="200" alt="Projet, thème clair">
   <img src="docs/screenshots/dark-home.png" width="200" alt="Accueil, thème sombre">
@@ -21,6 +30,7 @@ Une app de tâches calme et pastel, organisée par projets. Écrite en Flutter, 
 - **Suppression sécurisée** : projets et tâches sont supprimés après confirmation, et les projets peuvent aussi être balayés.
 - **Thèmes clair et sombre** : suit le système par défaut, avec un bouton de bascule sur l'accueil.
 - **Persistance locale** : tout est enregistré sur l'appareil, sans compte ni réseau.
+- **Splash animé** : le cercle du logo se dessine, puis la coche en sort (ignoré quand le système réduit les animations).
 
 L'interface est en français.
 
@@ -60,19 +70,34 @@ lib/
 ├── theme.dart              thèmes clair et sombre, teintes des projets
 ├── screens/
 │   ├── home_screen.dart    liste des projets
-│   └── project_screen.dart liste des tâches
+│   ├── project_screen.dart liste des tâches
+│   └── splash_gate.dart    logo animé au démarrage
 └── widgets/
     ├── check_circle.dart
     ├── composer.dart       pilule flottante d'ajout
     ├── confirm_dialog.dart
+    ├── logo_mark.dart      le logo, dessiné avec un painter
     └── progress_ring.dart
+assets/logo/                sources SVG du logo et de l'icône d'app
+tool/generate_icons.py      génère toutes les icônes d'app raster
 ```
 
 L'état tient dans un seul `ChangeNotifier`, exposé par un `InheritedNotifier` : aucune dépendance de gestion d'état.
 
 ## Design
 
-L'interface est un portage de la proposition « Pastel » faite avec Claude Design : Plus Jakarta Sans, cartes pastel par projet, composeur en pilule et variante sombre.
+L'interface est un portage de la proposition « Pastel » faite avec Claude Design : Plus Jakarta Sans, cartes pastel par projet, composeur en pilule et variante sombre. Le logo, une coche qui sort de son cercle, vient du même projet.
+
+### Logo et icônes d'app
+
+`assets/logo/` contient les sources SVG. Les icônes iOS (par défaut, sombre et teintée), Android (calques adaptatif et monochrome, plus PNG hérités), web et macOS sont générées à partir de la même géométrie :
+
+```bash
+pip install pillow
+python3 tool/generate_icons.py
+```
+
+Le script n'écrit que des PNG. Les calques vectoriels Android, les `Contents.json` et les écrans de lancement sont des fichiers ordinaires dans les dossiers des plateformes. Au lancement, l'écran natif affiche le fond de l'app et `SplashGate` y dessine le logo.
 
 ## Contribuer
 
