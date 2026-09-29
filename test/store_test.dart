@@ -140,8 +140,8 @@ void main() {
         store.addTask(project.id, t);
       }
       store.toggleTask(project.id, project.tasks.last.id); // d done
-      // Move "a" after "c" (ReorderableList passes newIndex = 3).
-      store.reorderOpen(project.id, 0, 3);
+      // Move "a" to the end of the open tasks.
+      store.reorderOpen(project.id, 0, 2);
       expect(project.tasks.map((t) => t.title), ['b', 'c', 'a', 'd']);
       // Move "a" to the front.
       store.reorderOpen(project.id, 2, 0);

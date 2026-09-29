@@ -120,13 +120,12 @@ class TodoStore extends ChangeNotifier {
     _commit();
   }
 
-  /// Reorders the open tasks. Indices refer to [Project.open], with the
-  /// `ReorderableList` convention where [newIndex] is the slot *before* removal.
+  /// Moves an open task. Both indices refer to [Project.open]; [newIndex] is
+  /// the final position, as given by `onReorderItem`.
   void reorderOpen(String projectId, int oldIndex, int newIndex) {
     final p = byId(projectId);
     if (p == null) return;
     final open = p.open;
-    if (newIndex > oldIndex) newIndex -= 1;
     if (oldIndex == newIndex) return;
     open.insert(newIndex, open.removeAt(oldIndex));
     final completed = p.completed; // read before the list is cleared
