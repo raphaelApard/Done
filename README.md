@@ -30,6 +30,7 @@
 - **Safe deletion**: projects and tasks are removed after a confirmation, and projects can also be swiped away.
 - **Light and dark themes**: follows the system by default, with a toggle on the home screen.
 - **Local persistence**: everything is saved on the device, no account and no network needed.
+- **Animated splash**: the ring of the logo is drawn, then the check breaks out of it (skipped when the system reduces motion).
 
 The interface is in French.
 
@@ -69,19 +70,34 @@ lib/
 ├── theme.dart              light and dark themes, project tints
 ├── screens/
 │   ├── home_screen.dart    project list
-│   └── project_screen.dart task list
+│   ├── project_screen.dart task list
+│   └── splash_gate.dart    animated logo shown at startup
 └── widgets/
     ├── check_circle.dart
     ├── composer.dart       floating "add" pill
     ├── confirm_dialog.dart
+    ├── logo_mark.dart      the logo, drawn with a custom painter
     └── progress_ring.dart
+assets/logo/                SVG sources of the logo and the app icon
+tool/generate_icons.py      renders every raster app icon
 ```
 
 State lives in a single `ChangeNotifier`, exposed through an `InheritedNotifier`, so the app has no state-management dependency.
 
 ## Design
 
-The UI is a port of the "Pastel" proposal made with Claude Design: Plus Jakarta Sans, pastel cards per project, a pill-shaped composer, and a dark variant.
+The UI is a port of the "Pastel" proposal made with Claude Design: Plus Jakarta Sans, pastel cards per project, a pill-shaped composer, and a dark variant. The logo, a check that breaks out of its circle, comes from the same project.
+
+### Logo and app icons
+
+`assets/logo/` holds the SVG sources. The icons for iOS (default, dark and tinted), Android (adaptive and monochrome layers, plus legacy PNGs), web and macOS are generated from the same geometry:
+
+```bash
+pip install pillow
+python3 tool/generate_icons.py
+```
+
+The script only writes PNG files. The Android vector layers, the `Contents.json` files and the launch screens are kept as plain files in the platform folders. On launch, the native screen shows the app background and `SplashGate` draws the logo on top of it.
 
 ## Contributing
 
