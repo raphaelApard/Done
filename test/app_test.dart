@@ -15,7 +15,7 @@ Future<TodoStore> storeWith(List<Project> projects) async {
 }
 
 Future<void> pumpApp(WidgetTester tester, TodoStore store) async {
-  await tester.pumpWidget(DoneApp(store: store, webFonts: false));
+  await tester.pumpWidget(DoneApp(store: store, webFonts: false, showSplash: false));
   await tester.pumpAndSettle();
 }
 

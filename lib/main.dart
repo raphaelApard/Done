@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'screens/home_screen.dart';
+import 'screens/splash_gate.dart';
 import 'store.dart';
 import 'theme.dart';
 import 'todo_scope.dart';
@@ -15,12 +16,20 @@ Future<void> main() async {
 }
 
 class DoneApp extends StatelessWidget {
-  const DoneApp({super.key, required this.store, this.webFonts = true});
+  const DoneApp({
+    super.key,
+    required this.store,
+    this.webFonts = true,
+    this.showSplash = true,
+  });
 
   final TodoStore store;
 
   /// Set to false to use the platform font (tests run without network).
   final bool webFonts;
+
+  /// Plays the animated logo before the home screen.
+  final bool showSplash;
 
   /// Widest the UI grows on tablets, desktop and the web.
   static const maxContentWidth = 520.0;
@@ -50,7 +59,7 @@ class DoneApp extends StatelessWidget {
               ),
             ),
           ),
-          home: const HomeScreen(),
+          home: showSplash ? const SplashGate(child: HomeScreen()) : const HomeScreen(),
         ),
       ),
     );
