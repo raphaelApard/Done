@@ -1,12 +1,21 @@
 [Français](README.fr.md) · **English**
 
-# Done
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/logo/logo-dark.svg">
+    <img src="assets/logo/logo.svg" width="96" alt="Done logo">
+  </picture>
+</p>
 
-[![CI](https://github.com/raphaelApard/Done/actions/workflows/ci.yml/badge.svg)](https://github.com/raphaelApard/Done/actions/workflows/ci.yml)
+<h1 align="center">Done</h1>
 
-A calm, pastel todo app organised by projects. Built with Flutter, works offline, and follows the system light or dark theme.
+<p align="center">
+  <a href="https://github.com/raphaelApard/Done/actions/workflows/ci.yml"><img src="https://github.com/raphaelApard/Done/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
+</p>
 
-<p>
+<p align="center">A calm, pastel todo app organised by projects. Built with Flutter, works offline, and follows the system light or dark theme.</p>
+
+<p align="center">
   <img src="docs/screenshots/light-home.png" width="200" alt="Home screen, light theme">
   <img src="docs/screenshots/light-project.png" width="200" alt="Project screen, light theme">
   <img src="docs/screenshots/dark-home.png" width="200" alt="Home screen, dark theme">
