@@ -101,4 +101,4 @@ Le script n'écrit que des PNG. Les calques vectoriels Android, les `Contents.js
 
 ## Contribuer
 
-Le travail se fait sur des branches courtes issues de `develop` (`feat/…`, `fix/…`, `docs/…`) et fusionnées par pull request. `main` ne reçoit que des merges taggés depuis `develop`. Les commits suivent [Conventional Commits](https://www.conventionalcommits.org/).
+Le travail se fait sur des branches courtes issues de `develop` (`feat/…`, `fix/…`, `docs/…`) et fusionnées par pull request. `main` ne reçoit que des merges taggés depuis `develop`. Le job `check` de la CI (`flutter analyze` et `flutter test`) doit passer avant de pouvoir merger une pull request dans `develop` ou `main` : la protection de branche l'impose, administrateurs compris. Une release est une pull request de `develop` vers `main`, taggée une fois mergée. Les commits suivent [Conventional Commits](https://www.conventionalcommits.org/).
