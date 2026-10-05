@@ -4,7 +4,7 @@
 
 `pwa/` est une version web autonome et installable de Done. Elle reproduit le design « Todo App v2 » fait avec Claude Design : jetons Broadsheet, Instrument Sans, cartes carrées avec anneau de progression, composeur carré dont le bouton s'élargit en « Ajouter », thème clair et thème sombre.
 
-Elle ne partage rien avec le code Flutter, à part les icônes de l'app. Les données ne sont pas synchronisées entre les deux versions.
+Elle ne partage rien avec le code Flutter, à part le logo : la même géométrie dessine les icônes de l'app et l'écran de lancement. Les données ne sont pas synchronisées entre les deux versions.
 
 ## Fonctionnalités
 
@@ -15,6 +15,7 @@ Elle ne partage rien avec le code Flutter, à part les icônes de l'app. Les don
 - **Confirmation de suppression** dans une feuille en bas de l'écran, pour les projets et les tâches.
 - **Thèmes** : suit le système. Sur grand écran, la barre du design (« Clair » / « Sombre ») apparaît au-dessus de l'app et le choix est mémorisé.
 - **Hors ligne et installable** : un service worker met en cache l'app et sa police, et le manifeste permet de l'installer sur l'écran d'accueil.
+- **Écran de lancement animé** : l'anneau du logo se dessine, puis la coche en sort, avec le même minutage que l'app Flutter (ignoré quand le système réduit les animations).
 - **Persistance locale** dans `localStorage`. Les projets d'exemple du design s'affichent à la première visite.
 
 L'interface est en français.

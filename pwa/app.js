@@ -430,6 +430,9 @@ function render() {
   renderConfirm();
 }
 
+const splash = $('splash');
+splash.addEventListener('animationend', e => { if (e.target === splash) splash.remove(); });
+
 history.replaceState(null, '');
 applyTheme();
 render();
