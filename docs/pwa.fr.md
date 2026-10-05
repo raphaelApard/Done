@@ -34,6 +34,7 @@ pwa/
 ├── store.js              transitions d'état, libellés et persistance, sans DOM
 ├── sw.js                 service worker (cache hors ligne)
 ├── manifest.webmanifest
+├── .vercelignore         fichiers exclus du déploiement Vercel
 ├── icons/                générées par tool/generate_icons.py
 └── tests/store.test.js   tests unitaires de store.js
 ```
@@ -54,6 +55,14 @@ Ouvrir http://localhost:8080. Un service worker ne tourne que sur `localhost` ou
 
 ## Déployer
 
-N'importe quel hébergement statique convient : publier le contenu de `pwa/` tel quel, en HTTPS. Tous les chemins sont relatifs, l'app peut donc vivre dans un sous-dossier (GitHub Pages, par exemple).
+L'app est en ligne sur https://done-pwa.vercel.app, depuis le projet Vercel `done-pwa` dont la racine est `pwa/`. Il n'y a pas d'étape de build : Vercel sert les fichiers tels quels, sans `tests/` (voir `.vercelignore`). Pour publier une nouvelle version :
+
+```bash
+cd pwa
+vercel link --project done-pwa   # une fois par machine
+vercel deploy --prod
+```
+
+Tout autre hébergement statique convient aussi : publier le contenu de `pwa/` en HTTPS. Tous les chemins sont relatifs, l'app peut donc aussi vivre dans un sous-dossier.
 
 Quand la liste des fichiers de `sw.js` change, incrémenter `VERSION` pour que les copies installées abandonnent l'ancien cache. Les modifications des fichiers existants arrivent chez les utilisateurs au lancement qui suit le téléchargement de la mise à jour.
