@@ -140,8 +140,9 @@ svg { display: block; }
 
 /* — page and app shell — */
 
-/* On a phone the app is the whole screen; the design's top bar (title and
-   theme switch) only appears around the framed app on wide screens. */
+/* On a phone the app is the whole screen. On a wide screen it stays a
+   centred column on the page background, and the theme switch of the
+   design sits in the top right corner. */
 .page { height: 100%; }
 .page-bar { display: none; }
 .app {
@@ -151,22 +152,12 @@ svg { display: block; }
   transition: background 240ms, color 240ms;
 }
 
-@media (min-width: 600px) and (min-height: 560px) {
-  .page {
-    min-height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: var(--space-4); padding: var(--space-8) var(--space-4);
-  }
-  .page-bar {
-    width: 402px; max-width: 100%; display: flex; align-items: center; justify-content: space-between;
-    font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-neutral-600);
-  }
-  .app {
-    --safe-top: 24px; --safe-bottom: 14px;
-    flex: none; width: 402px; max-width: 100%;
-    height: min(874px, calc(100dvh - 2 * var(--space-8) - var(--space-4) - 28px));
-    border-radius: 48px;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.12);
-  }
+@media (min-width: 600px) {
+  .app { --safe-top: 40px; --safe-bottom: 20px; max-width: 560px; margin: 0 auto; }
+}
+
+@media (min-width: 960px) {
+  .page-bar { display: block; position: fixed; z-index: 3; top: var(--space-4); right: var(--space-4); color: var(--color-neutral-600); }
 }
 
 .screen { flex: 1; display: flex; flex-direction: column; min-height: 0; position: relative; }
@@ -352,12 +343,12 @@ svg { display: block; }
 /* — delete confirmation — */
 
 .confirm {
-  position: absolute; inset: 0; z-index: 10; display: flex; align-items: flex-end;
+  position: fixed; inset: 0; z-index: 10; display: flex; align-items: flex-end; justify-content: center;
   padding: 0 calc(12px + env(safe-area-inset-right)) calc(var(--safe-bottom) + 18px) calc(12px + env(safe-area-inset-left));
   background: rgba(0,0,0,0.45);
 }
 .confirm-sheet {
-  width: 100%; background: var(--color-bg); color: var(--color-text); border-radius: 20px;
+  width: 100%; max-width: 536px; background: var(--color-bg); color: var(--color-text); border-radius: 20px;
   padding: 24px 20px 16px; box-shadow: var(--shadow-lg); display: flex; flex-direction: column; gap: 8px;
 }
 .confirm-title {
