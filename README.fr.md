@@ -58,6 +58,18 @@ flutter test
 
 La suite couvre les modèles, le store (persistance et données corrompues comprises), les thèmes, les widgets et les parcours principaux à travers les écrans. La CI lance ces deux commandes à chaque push et chaque pull request.
 
+## Application web (PWA)
+
+`pwa/` contient une seconde version autonome de Done : une application web installable qui reproduit exactement le design « Todo App v2 ». Elle est écrite en HTML, CSS et JavaScript, sans étape de build ni dépendance, fonctionne hors ligne et garde ses données dans le navigateur.
+
+```bash
+cd pwa
+npm start   # sert http://localhost:8080
+npm test
+```
+
+Voir [docs/pwa.fr.md](docs/pwa.fr.md) pour ses fonctionnalités, sa structure et son déploiement.
+
 ## Structure du projet
 
 ```
@@ -86,11 +98,11 @@ L'état tient dans un seul `ChangeNotifier`, exposé par un `InheritedNotifier` 
 
 ## Design
 
-L'interface est un portage de la proposition « Pastel » faite avec Claude Design : Plus Jakarta Sans, cartes pastel par projet, composeur en pilule et variante sombre. Le logo, une coche qui sort de son cercle, vient du même projet.
+L'interface est un portage de la proposition « Pastel » faite avec Claude Design : Plus Jakarta Sans, cartes pastel par projet, composeur en pilule et variante sombre. Le logo, une coche qui sort de son cercle, vient du même projet. La PWA suit une proposition plus récente du même projet, « Todo App v2 » (voir [docs/pwa.fr.md](docs/pwa.fr.md)).
 
 ### Logo et icônes d'app
 
-`assets/logo/` contient les sources SVG. Les icônes iOS (par défaut, sombre et teintée), Android (calques adaptatif et monochrome, plus PNG hérités), web et macOS sont générées à partir de la même géométrie :
+`assets/logo/` contient les sources SVG. Les icônes iOS (par défaut, sombre et teintée), Android (calques adaptatif et monochrome, plus PNG hérités), web, PWA et macOS sont générées à partir de la même géométrie :
 
 ```bash
 pip install pillow

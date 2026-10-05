@@ -1,0 +1,10 @@
+{
+  "name": "done-pwa",
+  "private": true,
+  "description": "Done as an installable web app, built from the Todo App v2 design.",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8080",
+    "test": "node --test 'tests/*.test.js'"
+  }
+}

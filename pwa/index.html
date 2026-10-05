@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
+  <title>Done</title>
+  <meta name="description" content="Done — carnet de tâches organisé par projets.">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" href="icons/favicon.png">
+  <link rel="apple-touch-icon" href="icons/Icon-maskable-192.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Done">
+  <meta name="theme-color" content="#f3f2f2" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#151414" media="(prefers-color-scheme: dark)">
+
+  <!-- Apply the saved or system theme before the first paint. -->
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('done.theme'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.dataset.theme = t;
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <div class="page">
+    <div class="page-bar">
+      <span>Done — carnet de tâches</span>
+      <div class="seg" role="radiogroup" aria-label="Thème">
+        <label class="seg-opt"><input type="radio" name="theme" value="light">Clair</label>
+        <label class="seg-opt"><input type="radio" name="theme" value="dark">Sombre</label>
+      </div>
+    </div>
+
+    <div class="app" id="app">
+
+      <section class="screen" id="home" data-screen-label="Home">
+        <div class="scroll home-scroll">
+          <div class="kicker" id="today"></div>
+          <div class="home-head">
+            <h1 class="home-title">Projets</h1>
+            <div class="home-count">
+              <div class="home-count-num" id="total-left">0</div>
+              <div class="kicker home-count-label">à faire</div>
+            </div>
+          </div>
+          <div class="grid" id="projects"></div>
+          <p class="empty empty-home" id="no-projects" hidden>Aucun projet. Nommez-en un ci-dessous.</p>
+        </div>
+        <form class="composer" id="project-composer" autocomplete="off">
+          <input class="input" placeholder="Nouveau projet…" aria-label="Nouveau projet" enterkeyhint="done">
+          <button type="submit" class="composer-btn" aria-label="Ajouter le projet" disabled></button>
+        </form>
+      </section>
+
+      <section class="screen" id="project" data-screen-label="Project" hidden>
+        <div class="scroll project-scroll">
+          <div class="project-bar">
+            <button type="button" class="btn btn-ghost back" id="back"></button>
+            <svg class="ring ring-36" width="36" height="36" viewBox="0 0 40 40" aria-hidden="true">
+              <circle cx="20" cy="20" r="17" class="ring-track"></circle>
+              <circle cx="20" cy="20" r="17" class="ring-fill" id="project-ring" transform="rotate(-90 20 20)"></circle>
+            </svg>
+          </div>
+          <div class="project-head">
+            <h1 class="project-title" id="project-name"></h1>
+            <div class="project-caption" id="project-caption"></div>
+          </div>
+          <div class="tasks" id="open-tasks"></div>
+          <p class="empty empty-open" id="no-open" hidden></p>
+
+          <div id="done-section" hidden>
+            <div class="done-head">
+              <button type="button" class="done-toggle" id="done-toggle" aria-expanded="true"></button>
+              <button type="button" class="btn btn-ghost done-clear" id="clear-done">Effacer</button>
+            </div>
+            <div class="done-list" id="done-tasks"></div>
+          </div>
+        </div>
+        <form class="composer" id="task-composer" autocomplete="off">
+          <input class="input" placeholder="Ajouter une tâche…" aria-label="Nouvelle tâche" enterkeyhint="done">
+          <button type="submit" class="composer-btn" aria-label="Ajouter la tâche" disabled></button>
+        </form>
+      </section>
+
+      <div class="confirm" id="confirm" role="dialog" aria-modal="true" aria-label="Confirmer la suppression" hidden>
+        <div class="confirm-sheet">
+          <div class="confirm-title" id="confirm-title"></div>
+          <div class="confirm-body" id="confirm-body"></div>
+          <div class="confirm-actions">
+            <button type="button" class="btn btn-secondary" id="confirm-cancel">Annuler</button>
+            <button type="button" class="btn btn-primary btn-danger" id="confirm-ok">Supprimer</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

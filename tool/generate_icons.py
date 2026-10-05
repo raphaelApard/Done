@@ -154,10 +154,12 @@ def android():
 
 
 def web():
-    save(principal(32, radius=0.225), "web/favicon.png")
-    for px in (192, 512):
-        save(principal(px, radius=0.225), f"web/icons/Icon-{px}.png")
-        save(principal(px), f"web/icons/Icon-maskable-{px}.png", opaque=True)
+    # The Flutter web target and the standalone PWA share the same icons.
+    for favicon, icons in (("web/favicon.png", "web/icons"), ("pwa/icons/favicon.png", "pwa/icons")):
+        save(principal(32, radius=0.225), favicon)
+        for px in (192, 512):
+            save(principal(px, radius=0.225), f"{icons}/Icon-{px}.png")
+            save(principal(px), f"{icons}/Icon-maskable-{px}.png", opaque=True)
 
 
 def macos():
