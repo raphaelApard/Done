@@ -52,17 +52,19 @@
   color-scheme: light;
 }
 
-[data-theme="dark"] {
-  --color-bg: #151414; --color-surface: #222020; --color-text: #f1efee;
-  --color-divider: color-mix(in srgb, #f1efee 14%, transparent);
-  --color-neutral-100: #2a2828; --color-neutral-200: #343131; --color-neutral-300: #454141;
-  --color-neutral-400: #7d7979; --color-neutral-500: #9b9797; --color-neutral-600: #bab6b6;
-  --color-neutral-700: #d7d3d3; --color-neutral-800: #eae7e7; --color-neutral-900: #f8f4f4;
-  --color-accent: #62c5ee; --color-accent-600: #38a6cf; --color-accent-700: #99e0ff;
-  --color-accent-100: #0a303e; --color-accent-800: #cbeeff;
-  --shadow-lg: 0 12px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
-  --shadow-md: 0 3px 10px rgba(0,0,0,0.5);
-  color-scheme: dark;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #151414; --color-surface: #222020; --color-text: #f1efee;
+    --color-divider: color-mix(in srgb, #f1efee 14%, transparent);
+    --color-neutral-100: #2a2828; --color-neutral-200: #343131; --color-neutral-300: #454141;
+    --color-neutral-400: #7d7979; --color-neutral-500: #9b9797; --color-neutral-600: #bab6b6;
+    --color-neutral-700: #d7d3d3; --color-neutral-800: #eae7e7; --color-neutral-900: #f8f4f4;
+    --color-accent: #62c5ee; --color-accent-600: #38a6cf; --color-accent-700: #99e0ff;
+    --color-accent-100: #0a303e; --color-accent-800: #cbeeff;
+    --shadow-lg: 0 12px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.06);
+    --shadow-md: 0 3px 10px rgba(0,0,0,0.5);
+    color-scheme: dark;
+  }
 }
 
 @keyframes rowIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
@@ -122,29 +124,13 @@ svg { display: block; }
 .input:hover { border-color: color-mix(in srgb, var(--color-text) 45%, transparent); }
 .input:focus-visible { border-color: var(--color-accent); outline-offset: 0; }
 
-.seg {
-  display: inline-flex; overflow: hidden;
-  border: 1px solid var(--color-divider); border-radius: var(--radius-md);
-}
-.seg-opt {
-  display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
-  padding: 5px 10px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-}
-.seg-opt input { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
-.seg-opt + .seg-opt { border-left: 1px solid var(--color-divider); }
-.seg-opt:has(input:checked) { background: var(--color-accent); color: var(--color-bg); }
-.seg-opt:not(:has(input:checked)):hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
-.seg-opt:has(input:focus-visible) { outline: 2px solid var(--color-accent); outline-offset: -2px; }
-
 .kicker { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-neutral-600); }
 
 /* — page and app shell — */
 
 /* On a phone the app is the whole screen. On a wide screen it stays a
-   centred column on the page background, and the theme switch of the
-   design sits in the top right corner. */
+   centred column on the page background. */
 .page { height: 100%; }
-.page-bar { display: none; }
 .app {
   position: relative; height: 100%; overflow: hidden;
   background: var(--color-bg); color: var(--color-text); font-family: var(--font-body);
@@ -154,10 +140,6 @@ svg { display: block; }
 
 @media (min-width: 600px) {
   .app { --safe-top: 40px; --safe-bottom: 20px; max-width: 560px; margin: 0 auto; }
-}
-
-@media (min-width: 960px) {
-  .page-bar { display: block; position: fixed; z-index: 3; top: var(--space-4); right: var(--space-4); color: var(--color-neutral-600); }
 }
 
 .screen { flex: 1; display: flex; flex-direction: column; min-height: 0; position: relative; }

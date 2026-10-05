@@ -13,7 +13,7 @@ It shares nothing with the Flutter code except the logo: the same geometry draws
 - **Reordering**: drag a row with the mouse, or drag the grip with a finger.
 - **Completed section** that collapses, with "Effacer" to clear it.
 - **Delete confirmation** in a bottom sheet for projects and tasks.
-- **Themes**: follows the system. From 960 px wide, the design's "Clair" / "Sombre" switch sits in the top right corner and the choice is remembered.
+- **Themes**: light and dark, following the system setting, live.
 - **Offline and installable**: a service worker caches the app and its font, and the manifest lets browsers install it on the home screen.
 - **Animated launch screen**: the logo's ring is drawn, then the check breaks out of it, with the same timing as the Flutter app (skipped when the system reduces motion).
 - **Local persistence** in `localStorage`. The sample projects of the design are shown on the first visit.

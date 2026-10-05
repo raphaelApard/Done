@@ -16,16 +16,6 @@
   <meta name="theme-color" content="#f3f2f2" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#151414" media="(prefers-color-scheme: dark)">
 
-  <!-- Apply the saved or system theme before the first paint. -->
-  <script>
-    (function () {
-      var t = null;
-      try { t = localStorage.getItem('done.theme'); } catch (e) {}
-      if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      document.documentElement.dataset.theme = t;
-    })();
-  </script>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400&display=swap">
@@ -34,13 +24,6 @@
 </head>
 <body>
   <div class="page">
-    <div class="page-bar">
-      <div class="seg" role="radiogroup" aria-label="Thème">
-        <label class="seg-opt"><input type="radio" name="theme" value="light">Clair</label>
-        <label class="seg-opt"><input type="radio" name="theme" value="dark">Sombre</label>
-      </div>
-    </div>
-
     <div class="app" id="app">
 
       <section class="screen" id="home" data-screen-label="Home">

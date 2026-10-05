@@ -13,7 +13,7 @@ Elle ne partage rien avec le code Flutter, à part le logo : la même géométri
 - **Réorganisation** : glisser une ligne à la souris, ou glisser la poignée au doigt.
 - **Section « Terminées »** repliable, avec « Effacer » pour la vider.
 - **Confirmation de suppression** dans une feuille en bas de l'écran, pour les projets et les tâches.
-- **Thèmes** : suit le système. À partir de 960 px de large, le sélecteur « Clair » / « Sombre » du design apparaît en haut à droite et le choix est mémorisé.
+- **Thèmes** : clair et sombre, selon le réglage du système, en direct.
 - **Hors ligne et installable** : un service worker met en cache l'app et sa police, et le manifeste permet de l'installer sur l'écran d'accueil.
 - **Écran de lancement animé** : l'anneau du logo se dessine, puis la coche en sort, avec le même minutage que l'app Flutter (ignoré quand le système réduit les animations).
 - **Persistance locale** dans `localStorage`. Les projets d'exemple du design s'affichent à la première visite.

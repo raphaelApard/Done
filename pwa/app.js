@@ -2,8 +2,6 @@
 // across renders, so the design's entry animations only play for new rows.
 import * as store from './store.js';
 
-const THEME_KEY = 'done.theme';
-
 const icon = {
   trash: '<svg width="{s}" height="{s}" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path opacity="0.25" d="M200,56V208a8,8,0,0,1-8,8H64a8,8,0,0,1-8-8V56Z"></path><path d="M216,48H176V40a24,24,0,0,0-24-24H104A24,24,0,0,0,80,40v8H40a8,8,0,0,0,0,16h8V208a16,16,0,0,0,16,16H192a16,16,0,0,0,16-16V64h8a8,8,0,0,0,0-16ZM96,40a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8v8H96Zm96,168H64V64H192ZM112,104v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Zm48,0v64a8,8,0,0,1-16,0V104a8,8,0,0,1,16,0Z"></path></svg>',
   plus: '<svg width="18" height="18" viewBox="0 0 256 256" fill="currentColor" aria-hidden="true"><path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path></svg>',
@@ -45,36 +43,6 @@ function setProjects(projects) {
 }
 
 const current = () => state.projects.find(p => p.id === state.projectId) || { id: null, name: '', tasks: [] };
-
-// — theme —
-
-const darkQuery = matchMedia('(prefers-color-scheme: dark)');
-
-function savedTheme() {
-  try {
-    const t = localStorage.getItem(THEME_KEY);
-    return t === 'light' || t === 'dark' ? t : null;
-  } catch { return null; }
-}
-
-function applyTheme() {
-  const theme = savedTheme() ?? (darkQuery.matches ? 'dark' : 'light');
-  document.documentElement.dataset.theme = theme;
-  for (const r of document.querySelectorAll('input[name="theme"]')) r.checked = r.value === theme;
-  const bg = getComputedStyle(document.documentElement).getPropertyValue('--color-bg').trim();
-  for (const m of document.querySelectorAll('meta[name="theme-color"]')) {
-    m.removeAttribute('media');
-    m.content = bg;
-  }
-}
-
-darkQuery.addEventListener('change', applyTheme);
-for (const r of document.querySelectorAll('input[name="theme"]')) {
-  r.addEventListener('change', () => {
-    try { localStorage.setItem(THEME_KEY, r.value); } catch { /* storage blocked */ }
-    applyTheme();
-  });
-}
 
 // — navigation (the system back gesture returns home) —
 
@@ -434,7 +402,6 @@ const splash = $('splash');
 splash.addEventListener('animationend', e => { if (e.target === splash) splash.remove(); });
 
 history.replaceState(null, '');
-applyTheme();
 render();
 // Refresh the date when the app comes back after midnight.
 document.addEventListener('visibilitychange', () => { if (!document.hidden && state.screen === 'home') renderHome(); });
